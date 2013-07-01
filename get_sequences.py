@@ -1,4 +1,4 @@
-#Get sequences for now leopard and some derivative species
+#Get sequences for snow leopard and some derivative species
 
 import os
 from Bio import SeqIO
@@ -24,5 +24,22 @@ for specie in species:
 	    out_handle.close()
 	    net_handle.close()
 	    print "Saved"
+
+for specie in species:
+	filename = specie + ".gbk"
+	for seq_record in SeqIO.parse(filename,"genbank"):
+		print specie
+		print repr(seq_record.seq)
+		sequence_length = len(seq_record.seq)
+		print "Length:", len(seq_record.seq)
+		sequence = seq_record.seq
+		for base in 'ACGT':
+			occurences = sequence.count(base)
+			print base, occurences, "%:", float(occurences)/sequence_length
+		print "\n"
+
+
+
+
 
 
