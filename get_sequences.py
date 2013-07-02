@@ -23,6 +23,7 @@ species_mtdna = {
 	"felis_catus" : "1098523",
 	"herpestes_javanicus" : "57014054"
 }
+
 species_cytb = {
 	"uncia_uncia" : "402234444",
 	"panthera_pardus" : "187250361",
@@ -43,14 +44,17 @@ species_cytc = {
 	"herpestes_javanicus" : "58578653"
 }
 
+# Retrieve mtDNA sequences
 for specie in species_mtdna:
 	filename = specie + ".gbk"
 	save_gbk_file(filename, species_mtdna[specie])
 
+# Retrieve Cytochrome B sequences
 for specie in species_cytb:
 	filename = specie + "_cytb.gbk"
 	save_gbk_file(filename, species_cytb[specie])
 
+# Retrieve Cytochrome C Oxidase Subunit 1 sequences
 for specie in species_cytc:
 	filename = specie + "_cytc.gbk"
 	save_gbk_file(filename, species_cytc[specie])
