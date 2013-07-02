@@ -16,7 +16,7 @@ def save_gbk_file (filename, g_id):
 Entrez.email = "me@izac.us"
 species_mtdna = {
 	"uncia_uncia" : "187250378",
-	"panthera_pardus" : "482514544",
+	"panthera_pardus" : "187250348",
 	"panthera_leo_persica" : "482514544",
 	"panthera_tigris_sumatrae" : "339716942",
 	"neofelis_nebulosa" : "78157535",
