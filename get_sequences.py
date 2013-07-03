@@ -4,10 +4,11 @@ import os
 from Bio import SeqIO
 from Bio import Entrez
 
-def save_gbk_file (filename, g_id):
+def save_seq_file (filename, g_id, type, append):
+	# Comment the next line out after retrieving AA sequences
 	if not os.path.isfile(filename):
-	    net_handle = Entrez.efetch(db="nucleotide",id=g_id,rettype="gb", retmode="text")
-	    out_handle = open(filename, "w")
+	    net_handle = Entrez.efetch(db="nucleotide",id=g_id,rettype=type, retmode="text")
+	    out_handle = open(filename, "a" if append else "w" )
 	    out_handle.write(net_handle.read())
 	    out_handle.close()
 	    net_handle.close()
@@ -47,17 +48,19 @@ species_cytc = {
 # Retrieve mtDNA sequences
 for specie in species_mtdna:
 	filename = specie + ".gbk"
-	save_gbk_file(filename, species_mtdna[specie])
+	save_seq_file(filename, species_mtdna[specie], "gb", False)
 
-# Retrieve Cytochrome B sequences
+# Retrieve Cytochrome B sequences and Cytochrome C Oxidase Subunit 1 sequences
 for specie in species_cytb:
 	filename = specie + "_cytb.gbk"
-	save_gbk_file(filename, species_cytb[specie])
-
-# Retrieve Cytochrome C Oxidase Subunit 1 sequences
-for specie in species_cytc:
+	save_seq_file(filename, species_cytb[specie], "gb", False)
 	filename = specie + "_cytc.gbk"
-	save_gbk_file(filename, species_cytc[specie])
+	save_seq_file(filename, species_cytc[specie], "gb", False)
+
+#Retrieve amino acid sequences
+for specie in species_cytb:
+	save_seq_file("cytb.fasta", species_cytb[specie], "fasta", True)
+	save_seq_file("cytc.fasta", species_cytc[specie], "fasta", True)
 
 for specie in species_mtdna:
 	filename = specie + ".gbk"
