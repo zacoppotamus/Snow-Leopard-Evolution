@@ -47,24 +47,17 @@ species_cytc = {
 
 # Retrieve mtDNA sequences
 for specie in species_mtdna:
-	filename = specie + ".gbk"
-	save_seq_file(filename, species_mtdna[specie], "gb", False)
+	filename = specie + ".fasta"
+	save_seq_file(filename, species_mtdna[specie], "fasta", False)
 
-# Retrieve Cytochrome B sequences and Cytochrome C Oxidase Subunit 1 sequences
-for specie in species_cytb:
-	filename = specie + "_cytb.gbk"
-	save_seq_file(filename, species_cytb[specie], "gb", False)
-	filename = specie + "_cytc.gbk"
-	save_seq_file(filename, species_cytc[specie], "gb", False)
-
-#Retrieve amino acid sequences
+#Retrieve amino acid sequences (CTB and COX1)
 for specie in species_cytb:
 	save_seq_file("cytb.fasta", species_cytb[specie], "fasta", True)
 	save_seq_file("cytc.fasta", species_cytc[specie], "fasta", True)
 
 for specie in species_mtdna:
-	filename = specie + ".gbk"
-	for seq_record in SeqIO.parse(filename,"genbank"):
+	filename = specie + ".fasta"
+	for seq_record in SeqIO.parse(filename,"fasta"):
 		print specie
 		print repr(seq_record.seq)
 		sequence_length = len(seq_record.seq)
